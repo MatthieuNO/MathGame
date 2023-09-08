@@ -1,13 +1,30 @@
- 
-    const Home = ({setStartGame}) => {
+import Game from "./Game.js";
+import StartGame from "./StartGame.js";
+import { useState } from "react";
 
-        return (
-            <div className="center">
-                <h1>Welcome</h1>
-                <button onClick={ () => setStartGame(true)}>Game Start</button>
-            </div>
-        );
-    };
+function Home() {
 
+ const [GoGame, setGoGame] = useState(false)
+ const [Numbers, setNumbers] = useState([]);
+ const [TotalResult, setTotalResult] = useState(0)
+
+ const newNumbers = [];
+
+
+ const RandomNumber = () => {
+    newNumbers[0] = Math.floor(Math.random() * 101);;
+    newNumbers[1] = Math.floor(Math.random() * 101);;
+    console.log(newNumbers);
+    setNumbers(newNumbers);
+  };
+    
+
+  return (
+    <div>
+      {GoGame ? <Game setGoGame={setGoGame} RandomNumber={RandomNumber} Numbers={Numbers} newNumber={newNumbers} TotalResult={TotalResult} setTotalResult={setTotalResult}/> : 
+      <StartGame setGoGame={setGoGame} RandomNumber={RandomNumber} Numbers={Numbers} TotalResult={TotalResult} setTotalResult={setTotalResult}/>}
+    </div>
+  );
+}
 
 export default Home;
